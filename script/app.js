@@ -17,7 +17,7 @@ SP.App = function spApp() {
     now: SP.Platform.now
   };
 
-  var canvas = SP.Platform.getById('primary_sapling_canvas');
+  var canvas = SP.Platform.getById('primary_canvas');
   var engine = SP.Engine(coreApi, engineTimeWindow);
 
   var extensionApi = {
@@ -38,17 +38,6 @@ SP.App = function spApp() {
   self = {
     main: function() {
       var render = SP.Renderer(extensionApi);
-      /*
-      var ratio = canvas.getContext('2d').webkitBackingStorePixelRatio || 1;
-      var scale = 1 / ratio;
-      if (ratio !== 1) {
-        canvas.width = scale * canvas.width;
-        canvas.height = scale * canvas.height;
-        canvas.style.width = '640px';
-        canvas.style.height = '480px';
-        canvas.getContext('2d').scale(scale, scale);
-      }
-      */
       var sapling = SP.Sapling(moduleApi, canvas);
 
       SP.Platform.addListener(
