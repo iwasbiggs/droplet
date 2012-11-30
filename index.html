@@ -5,25 +5,26 @@
     <script>
       SP = {};
     </script>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+      canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
     <script src="./script/app.js"></script>
-    <script src="./script/sapling.js"></script>
-    <script src="./script/engine.js"></script>
     <script src="./script/context.js"></script>
-    <script src="./script/renderer.js"></script>
+    <script src="./script/engine.js"></script>
     <script src="./script/platform.js"></script>
+    <script src="./script/renderer.js"></script>
+    <script src="./script/sapling.js"></script>
   </head>
   <body>
-    <section>
-      <article class="sapling">
-        <div id="canvas_wrapper">
-          <canvas id="primary_sapling_canvas"
-                  class="sapling-canvas"
-                  width="640"
-                  height="480">:(</canvas>
-        </div>
-      </article>
-    </section>
-    <footer></footer>
-    <script src="./script/bootstrap.js"></script>
+    <canvas id="primary_sapling_canvas" class="sapling-canvas"
+            width="800" height="600">:(</canvas>
+  <script src="./script/bootstrap.js"></script>
   </body>
 </html>
