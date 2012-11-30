@@ -78,12 +78,24 @@ SP.Sapling = function spSapling(api) {
     }
   }
 
+  function normalizeSin(percent) {
+    return (Math.sin(Math.PI * 2 * percent) + 1) / 2;
+  }
+
+  function generateColor() {
+    var seconds = (new Date()).getSeconds();
+    var red = Math.round(normalizeSin((seconds % 10) / 10) * 64);
+    var green = Math.round(normalizeSin((seconds % 20) / 20) * 128);
+    var blue = Math.round(normalizeSin((seconds % 30) / 30) * 255);
+    return [red, green, blue];
+  }
+
   self = {
     addDrop: function saplingAddDrop(x, y) {
       if (!drops.length) {
         api.addAction(dropUpdate);
       }
-      drops.push(SP.Drop(x, y, [70, 70, 99]));
+      drops.push(SP.Drop(x, y, generateColor()));
       return self;
     }
   };

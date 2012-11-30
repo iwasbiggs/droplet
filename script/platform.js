@@ -3,7 +3,10 @@ SP.Platform = {
     return document.getElementById(id);
   },
   setTimeout: function platformSetTimeout(callback, delay) {
-    return window.setTimeout(callback, delay);
+    return setTimeout(callback, delay);
+  },
+  clearTimeout: function platformClearTimeout(id) {
+    clearTimeout(id);
   },
   log: function platformLog(message) {
     window.console.log('log: ' + message);

@@ -9,7 +9,7 @@ SP.Context = function spContext(api, canvas) {
     return 'rgb(' + channelValues.join() + ')';
   }
 
-  function dropRender(drop) {
+  function renderDrop(drop) {
     context.save();
     context.translate(drop.x, drop.y);
     context.fillStyle = buildFillStyle(drop.colors);
@@ -21,9 +21,16 @@ SP.Context = function spContext(api, canvas) {
   }
 
   self = {
-    renderDrop: dropRender,
+    renderDrop: renderDrop,
     clear: function contextClear() {
       context.clearRect(0, 0, width, height);
+      return self;
+    },
+    getWidth: function contextGetWidth() {
+      return width;
+    },
+    getHeight: function contextGetHeight() {
+      return height;
     }
   };
   return self;

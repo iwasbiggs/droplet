@@ -1,24 +1,17 @@
 SP.App = function spApp() {
   var self;
-  var engineTimeWindow = 10;
 
   var coreApi = {
     queue: function(action) {
-    /*
-      return SP.Platform.setTimeout(function() {
-        action();
-      }, 0);
-      */
-      return webkitRequestAnimationFrame(function() {
-        action();
-      });
+      //return SP.Platform.setTimeout(action);
+      return webkitRequestAnimationFrame(action);
     },
     log: SP.Platform.log,
     now: SP.Platform.now
   };
 
   var canvas = SP.Platform.getById('primary_canvas');
-  var engine = SP.Engine(coreApi, engineTimeWindow);
+  var engine = SP.Engine(coreApi, 10);
 
   var extensionApi = {
     addAction: engine.addAction,
@@ -32,18 +25,27 @@ SP.App = function spApp() {
     renderDrop: renderContext.renderDrop,
     clear: renderContext.clear,
     log: SP.Platform.log,
-    now: SP.Platform.now
+    now: SP.Platform.now,
+    setTimeout: SP.Platform.setTimeout,
+    clearTimeout: SP.Platform.clearTimeout
   };
 
   self = {
     main: function() {
       var render = SP.Renderer(extensionApi);
-      var sapling = SP.Sapling(moduleApi, canvas);
+      var sapling = SP.Sapling(moduleApi);
+      var teaser = SP.Teaser(
+          moduleApi, renderContext.getWidth(), renderContext.getHeight());
 
       SP.Platform.addListener(
           canvas, 'mousedown', function canvasClicked(event) {
-            sapling.addDrop(event.offsetX, event.offsetY);
+            teaser.pause();
+            sapling.addDrop(event.clientX, event.clientY);
           });
+
+      teaser.onPoke(function teaserPoke(x, y) {
+        sapling.addDrop(x, y);
+      });
       
       return self;
     }
