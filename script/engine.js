@@ -16,8 +16,10 @@ SP.Engine = function spEngine(api, timeWindowMS) {
   function reportActions() {
     // Add one in case it was too small to measure.
     var durationActive = (api.now() - lastIdleTime + 1) / 1000;
-    api.log('Jobs per Second: ' + Math.round(nextActionId / durationActive) +
-            ' Long Action count: ' + stats.longActionCount);
+    if (stats.longActionCount) {
+      api.log('Jobs per Second: ' + Math.round(nextActionId / durationActive) +
+              ' Long Action count: ' + stats.longActionCount);
+    }
   }
 
   function runQueue() {

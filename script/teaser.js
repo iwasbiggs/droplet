@@ -6,8 +6,8 @@ SP.Teaser = function(api, width, height) {
   function timeoutFired() {
     timeoutId = api.setTimeout(timeoutFired, generateDelay());
     callLater(
-      Math.round(Math.random() * width),
-      Math.round(Math.random() * height));
+      Math.round(Math.random() * self.width),
+      Math.round(Math.random() * self.height));
   }
 
   function generateDelay() {
@@ -20,6 +20,8 @@ SP.Teaser = function(api, width, height) {
       timeoutId = api.setTimeout(timeoutFired, 8000);
       return self;
     },
+    width: width,
+    height: height,
     onPoke: function teaserOnPoke(callback) {
       callLater = callback;
       return self;

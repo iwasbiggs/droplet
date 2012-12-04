@@ -26,6 +26,10 @@ SP.Context = function spContext(api, canvas) {
       context.clearRect(0, 0, width, height);
       return self;
     },
+    resize: function contextResize() {
+      width = canvas.width = canvas.clientWidth;
+      height = canvas.height = canvas.clientHeight;
+    },
     getWidth: function contextGetWidth() {
       return width;
     },

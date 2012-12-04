@@ -39,9 +39,17 @@ SP.App = function spApp() {
 
       SP.Platform.addListener(
           canvas, 'mousedown', function canvasClicked(event) {
-            teaser.pause();
-            sapling.addDrop(event.clientX, event.clientY);
-          });
+        teaser.pause();
+        sapling.addDrop(event.clientX, event.clientY);
+      });
+      SP.Platform.addListener(window, 'resize', function windowResized(event) {
+        renderContext.resize();
+        var width = renderContext.getWidth();
+        var height = renderContext.getHeight();
+        teaser.pause();
+        teaser.width = width;
+        teaser.height = height;
+      });
 
       teaser.onPoke(function teaserPoke(x, y) {
         sapling.addDrop(x, y);
